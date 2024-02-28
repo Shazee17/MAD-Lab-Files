@@ -1,6 +1,6 @@
 # Mobile App Development Course Lab Files
 
-- Welcome to the repository for your Mobile App Development (MAD) course lab files! 
+- Welcome to the repository for my Mobile App Development (MAD) course lab files! 
 - This repository contains all the exercises, tasks, and practice files for my MAD course.
 - Each lab session is organized into separate directories, making it easy to navigate and find the relevant materials.
 
