@@ -1,32 +1,26 @@
 package com.example.myapplication
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.edit
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val prefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE )
         setContent {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
@@ -34,52 +28,29 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
     }
 }
 
-class PreferencesManager(context: Context){
-    //Step 1 - Create sharedPref Object
-    val prefs = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-
-    //Step 2 - For Writing Purpose
-    fun writeString(key: String, value: String){
-        val editor = prefs.edit()
-        editor.putString(key, value)
-        editor.apply()
-    }
-
-    //Step 3 - For Reading
-    fun readString(key: String, defValue: String): String{
-        return prefs.getString(key, defValue) ?: defValue
-    }
-}
-
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier, context: Context = LocalContext.current) {
-    val prefsMgr = PreferencesManager(context)
+fun Greeting(modifier: Modifier = Modifier) {
+    val myContext = LocalContext.current
 
-    var username by remember{
-        mutableStateOf("")
-    }
 
-    val usernameValue = prefsMgr.readString("user", "Guest")
-
-    Column(
+    Column (
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextField(value = username, onValueChange = {
-            username = it
-        })
+        Text(text = "Go to second activity")
         Button(onClick = {
-            prefsMgr.writeString("user", username)
+            myContext.startActivity(Intent(myContext, SecondActivity::class.java))
         }) {
-            Text(text = "Save")
+            Text(text = "Click Me")
         }
-        Text(usernameValue)
     }
 }
 
@@ -87,6 +58,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier, context: Context = Loc
 @Composable
 fun GreetingPreview() {
     MyApplicationTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
