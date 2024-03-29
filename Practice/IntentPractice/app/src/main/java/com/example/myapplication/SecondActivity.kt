@@ -37,14 +37,18 @@ class SecondActivity : ComponentActivity() {
 
 @Composable
 fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    var myContext = LocalContext.current
-
+    val myContext = LocalContext.current
+    val myActivity = myContext as SecondActivity
+    // Get the Intent that started this activity
+    val intent = myActivity.intent
+    // Get the data from the Intent
+    val data = intent.getStringExtra("name")
     Column (
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome to second activity")
+        Text(text = "Welcome to second activity, $data")
         Button(onClick = {
             myContext.startActivity(Intent(myContext, MainActivity::class.java))
         }) {

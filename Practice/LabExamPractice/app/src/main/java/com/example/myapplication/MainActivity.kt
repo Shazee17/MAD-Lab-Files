@@ -58,6 +58,15 @@ class MainActivity : ComponentActivity() {
                     )
                 )
             },
+            bottomBar = {
+                TopAppBar(
+                    title = { Text(text = "BOTTOM APP BAR") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.secondary
+                    )
+                )
+            },
             content = {
                 Column(
                     modifier = Modifier.fillMaxSize(),

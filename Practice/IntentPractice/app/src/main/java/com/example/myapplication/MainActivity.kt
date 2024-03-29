@@ -47,7 +47,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     ) {
         Text(text = "Go to second activity")
         Button(onClick = {
-            myContext.startActivity(Intent(myContext, SecondActivity::class.java))
+            myContext.startActivity(Intent(myContext, SecondActivity::class.java).putExtra("name", "Shahzaman"))
         }) {
             Text(text = "Click Me")
         }
